@@ -42,13 +42,6 @@ class Ritoapi(object):
         args = {'api_key': self.api_key}
         return self._requests(api_url, args)
 
-    def get_current_match_data(self, id):
-        api_url = Consts.URL[''].format(
-
-        )
-        args = {'api_key': self.api_key}
-        return self._requests(api_url, args)
-
     def get_past_20_ranked_solo(self, id):
         api_url = Consts.URL['match_by_queue'].format(
             accountId=id
