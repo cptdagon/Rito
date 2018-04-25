@@ -18,7 +18,7 @@ class Ritoapi(object):
                 ),
             params=args
             )   
-        print (response.url)
+        #print (response.url)
         return response.json()
     
     def get_summoner_by_name(self, name):
@@ -30,6 +30,13 @@ class Ritoapi(object):
 
     def get_rank_by_summonerid(self, id):
         api_url = Consts.URL['positions_by_summoner'].format(
+	        summonerId=id
+	    )
+        args = {'api_key': self.api_key}
+        return self._requests(api_url, args)
+
+    def get_current_game(self, id):
+        api_url = Consts.URL['current_game_data'].format(
 	        summonerId=id
 	    )
         args = {'api_key': self.api_key}
