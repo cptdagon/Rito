@@ -5,30 +5,11 @@ import matplotlib.image as mpimg
 
 def main():
     api = Ritoapi('RGAPI-ca78c7f7-b858-4b2e-bac9-892adb55ff0d') #api key goes here
-    r = api.get_summoner_by_name('Mrhappycrack')
+    r = api.get_summoner_by_name('Infernacus')
     z = True
 
-    data = [['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','',''],
-            ['','','']]
+    data = [['' for x in range (0,3)] for y in range (0,20)]
+
     try:
         a = api.get_current_game(r['id'])
     except KeyError:
