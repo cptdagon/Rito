@@ -4,33 +4,65 @@ import matplotlib.image as mpimg
 
 
 def main():
-    api = Ritoapi('RGAPI-57149e71-f363-4517-aa91-8190dfd3d8e6') #api key goes here
-    r = api.get_summoner_by_name('Infernacus')
+    api = Ritoapi('RGAPI-ca78c7f7-b858-4b2e-bac9-892adb55ff0d') #api key goes here
+    r = api.get_summoner_by_name('Mrhappycrack')
     z = True
+
+    data = [['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','',''],
+            ['','','']]
     try:
         a = api.get_current_game(r['id'])
     except KeyError:
-        print ('No Game Available')
+        data[0][1] = ('No Game Available')
         z = False
     if z:
         b = a['participants']
         i = 0
-        print(a['gameMode'])
+        j = 5
+        data[0][1] = 'Game Mode'
+        data[1][1] = (a['gameMode'])
         if a['gameQueueConfigId'] == 420:
-            print('Ranked' + '\n')
+            data[2][1] = ('Ranked')
         for val in b:
             if i == 0:
-                print ('Blue team\n')
+                data[3][0] = ('Blue team')
+                k = 0
             if i == 5:
-                print ('Red team\n')
-            print (b[i]['summonerName'])
+                data[3][2] = ('Red team')
+                j = 5
+                k = 2
+            data[j][k] = (b[i]['summonerName'])
             rankdata = api.get_rank_by_summonerid(b[i]['summonerId'])
             try:
-                rank = rankdata[0]['queueType'] + ' ' + rankdata[0]['tier'] + ' ' + rankdata[0]['rank'] + '\n'
+                rank = rankdata[0]['queueType'] + ' ' + rankdata[0]['tier'] + ' ' + rankdata[0]['rank']
             except IndexError:
-                rank = 'Unranked \n'
-            print (rank)
+                rank = 'Unranked'
+            j += 1
+            data[j][k] = (rank)
             i += 1
+            j += 2
+    col_width = max(len(word) for row in data for word in row) + 2  # padding
+    for row in data:
+        print ("".join(word.ljust(col_width) for word in row))
 
 if __name__ == "__main__":
 	main()
